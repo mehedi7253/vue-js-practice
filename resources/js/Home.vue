@@ -6,7 +6,7 @@
                 <div class="card-body text-center">
                     <router-link class="btn btn-info col-md-5 mt-2" to="/">Home</router-link><br />
                     <router-link class="btn btn-success col-md-5 mt-2" to="/add-member">Add Member</router-link><br />
-                    <router-link class="btn btn-dark col-md-5 mt-2" to="/">Add Meal</router-link><br />
+                    <router-link class="btn btn-dark col-md-5 mt-2" to="/add-meal">Add Meal</router-link><br />
                     <router-link class="btn btn-dark col-md-5 mt-2" to="/">Report</router-link><br />
                 </div>
             </div>

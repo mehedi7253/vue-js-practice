@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ProductController2;
 use App\Http\Controllers\API\MemberController;
+use App\Http\Controllers\API\MealController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,4 +28,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/members', [MemberController::class, 'index'])->name('member'); 
 Route::post('/members/add', [MemberController::class, 'addmember'])->name('member.add');
 Route::get('/edit/{id}', [MemberController::class, 'edit'])->name('member.edit');
+Route::PUT('/update/{id}', [MemberController::class, 'update'])->name('member.update');
 Route::delete('/members/{id}', [MemberController::class, 'delete'])->name('member.delete');
+
+//meal
+Route::get('/all-members', [MealController::class, 'index'])->name('meal.index');
+Route::post('/add-meal', [MealController::class, 'store'])->name('meal.store');

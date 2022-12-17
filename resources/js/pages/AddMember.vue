@@ -4,11 +4,8 @@
             <div class="col-md-5 col-sm-12 mt-5 float-left">
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-md-7 col-sm-12 float-left">
-                            <h3>Add Member</h3>
-                        </div>
-                        <div class="col-md-5 col-sm-12 float-left">
-                            <h3>Home</h3>
+                        <div class="col-md-12 col-sm-12 float-left">
+                            <h5 class="text-center">Add Member </h5>
                         </div>
                     </div>
                     <div class="card-body">
@@ -31,7 +28,7 @@
             <div class="col-md-7 col-sm-12 mt-5 float-left">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Manage Member </h3>
+                        <h5 class="text-center">Manage Member </h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,12 +40,12 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-center">
+                                <tbody>
                                     <tr v-for="member in members" :key="member.id">
-                                        <td>{{ member.name }}</td>
+                                        <td class="text-capitalize">{{ member.name }}</td>
                                         <td v-if="member.status == '1'" class="text-center"><span class="text-success">Active</span></td>
                                         <td v-if="member.status == '0'"  class="text-center"><span class="text-danger">In-Active</span></td>
-                                        <td>
+                                        <td class="text-center">
                                             <router-link :to="{name: 'edit', params:{id:member.id}}" class="btn btn-info">Edit</router-link>
                                             | <a @click="deleteMember(member.id)" class="btn btn-danger text-white">Delete</a>
                                         </td>
@@ -101,11 +98,16 @@ export default {
                     }
                 })
                 .catch(error => this.errors = error.response.data.errors)
+        },
+        editMember() {
+            let id = this.$route.params.id
+            axios.get('/api/edit/' + id)
+                .then(({ data }) => (this.members = data))
+                .catch(this.errors)
         }
     },
     created() {
         this.allMember();
-    }
-        
+        }, 
     }
 </script>

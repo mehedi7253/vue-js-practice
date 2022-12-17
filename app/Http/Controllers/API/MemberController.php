@@ -37,6 +37,14 @@ class MemberController extends Controller
         return response()->json($member);
     }
 
+    public function update(Request $request, $id)
+    {
+        $member = member::find($id);
+        $member->name   = $request->name;
+        $member->save();
+        return response()->json('scuccess');
+    }
+
     public function delete($id)
     {
         $member = member::find($id);

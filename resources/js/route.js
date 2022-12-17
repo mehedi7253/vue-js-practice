@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from './Home.vue'
 import AddMember from './pages/AddMember.vue'
 import Editmember from './pages/Editmember.vue'
+import AddMeal from './pages/AddMeal.vue'
 
 const routes = [
     {
@@ -31,6 +32,16 @@ const routes = [
             page: 'Update Member Details'
         }
     },
+    {
+        path: '/add-meal',
+        name: 'Add Meal',
+        component: AddMeal,
+        meta: {
+            title: 'Add Meal',
+            page: 'Add Meal'
+        }
+    },
+
 ];
 
 const router = createRouter({
