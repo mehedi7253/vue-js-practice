@@ -14,13 +14,24 @@ class MealController extends Controller
         $members = member::all();
         return response()->json($members);
     }
-    public function stroe(Request $request)
+    public function store(Request $request)
     {
-        foreach($request->user_id as $i=>$meal)
+        // if ($meals = $request->get('myArray')) {
+        //     foreach($meals as $meal){
+        //         meal::create([
+        //             'date' => $meal['date'],
+        //             'user_id' => $meal['user_id'],
+        //             'meal'    => 1,
+        //         ]);
+        //     }
+        // }
+        // return response()->json($meals);
+
+        foreach($request->user_id as $i => $meal)
         {
             $meal = new meal();
             $meal->date    = $request->date;
-            $meal->user_id = $request->user_id [$i];
+            $meal->user_id = $request->user_id[$i];
             $meal->meal    = '1';
 
             $meal->save();

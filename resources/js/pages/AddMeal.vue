@@ -7,10 +7,10 @@
                         <h5 class="text-center">Add Meal </h5>
                     </div>
                     <div class="card-body">
-                        <form action="" @submit.prevent="AddMeal">
+                        <form ef="form_1" @submit.prevent="AddMeal">
                             <div class="form-group">
                                 <label>Select Date</label>
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" v-model="member.date">
                             </div>
                             <div class="form-group mt-3">
                                 <table class="table table-bordered">
@@ -23,7 +23,8 @@
                                     <tbody>
                                         <tr v-for="member in members" :key="member.id">
                                             <td>
-                                                <input type="checkbox" v-model="member.id">
+                                                <input type="checkbox" v-model="member.id" name="user_id[]">
+                                                <!-- <input type="checkbox" v-model="member.id"> -->
                                             </td>
                                             <td>
                                                 {{ member.name }}
@@ -47,10 +48,7 @@
 export default {
     data() {
         return {
-            meal: {
-              date: '',
-              user_id: '',  
-            },
+            member: {},
             members: [],
             errors: {},
         }
@@ -62,8 +60,16 @@ export default {
                 .catch()
         },
         AddMeal() {
-            
-        }
+            axios.post('/api/add-meal', this.member)
+                .then((response) => {
+                    if (response.status == 200) {
+                        // window.location.href = '/add-member';
+                        this.$refs.form_1.reset();
+                        this.$toast.success('Meal Added Successfully')
+                    }
+                })
+                .catch(error => this.errors = error.response.data.errors)
+        },
     },
 
     created()
