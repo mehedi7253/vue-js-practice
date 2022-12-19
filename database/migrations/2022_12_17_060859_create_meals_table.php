@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('date');
-            $table->string('meal');
+            $table->string('meal')->nullable();
             $table->timestamps();
         });
     }

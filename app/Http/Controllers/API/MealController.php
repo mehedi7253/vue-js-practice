@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\meal;
 use App\Models\member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MealController extends Controller
 {
@@ -16,26 +17,14 @@ class MealController extends Controller
     }
     public function store(Request $request)
     {
-        // if ($meals = $request->get('myArray')) {
-        //     foreach($meals as $meal){
-        //         meal::create([
-        //             'date' => $meal['date'],
-        //             'user_id' => $meal['user_id'],
-        //             'meal'    => 1,
-        //         ]);
-        //     }
-        // }
-        // return response()->json($meals);
-
-        foreach($request->user_id as $i => $meal)
-        {
-            $meal = new meal();
-            $meal->date    = $request->date;
-            $meal->user_id = $request->user_id[$i];
-            $meal->meal    = '1';
-
-            $meal->save();
-            return response()->json('Succcess');
+        foreach ($request->user_id as $key=>$insert) {
+            $saverecord = [
+                'date'     => $request->date,
+                'user_id'  => $request->user_id [$key],
+                'meal'     => 1,
+            ];
+            $data = DB::table('meals')->insert($saverecord);
         }
+        return response()->json($data);
     }
 }
