@@ -20,11 +20,13 @@ class MealController extends Controller
         foreach ($request->user_id as $key=>$insert) {
             $saverecord = [
                 'date'     => $request->date,
-                'user_id'  => $request->user_id [$key],
+                'user_id'  => $request->user_id[$key],
                 'meal'     => 1,
             ];
-            $data = DB::table('meals')->insert($saverecord);
+           
+            // $data = DB::table('meals')->insert($saverecord);
         }
+        $data = meal::insert($saverecord);
         return response()->json($data);
     }
 }
